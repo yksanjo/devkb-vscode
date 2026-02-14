@@ -1,0 +1,86 @@
+{
+  "name": "@devkb/ide-plugin",
+  "version": "1.0.0",
+  "description": "VS Code extension for DevKB - Developer Knowledge Base",
+  "main": "dist/extension.js",
+  "publisher": "devkb",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other",
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onCommand:devkb.ask",
+    "onCommand:devkb.search",
+    "onCommand:devkb.addEntry",
+    "onCommand:devkb.index"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "devkb.ask",
+        "title": "DevKB: Ask a Question"
+      },
+      {
+        "command": "devkb.search",
+        "title": "DevKB: Search Knowledge Base"
+      },
+      {
+        "command": "devkb.addEntry",
+        "title": "DevKB: Add Knowledge Entry"
+      },
+      {
+        "command": "devkb.index",
+        "title": "DevKB: Index Current Project"
+      },
+      {
+        "command": "devkb.stats",
+        "title": "DevKB: Show Statistics"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "devkb.addEntry",
+          "when": "editorTextFocus",
+          "group": "devkb"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "devkb.ask",
+          "when": "editorTextFocus"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "DevKB",
+      "properties": {
+        "devkb.apiUrl": {
+          "type": "string",
+          "default": "http://localhost:3001",
+          "description": "URL of the DevKB API server"
+        },
+        "devkb.dataDir": {
+          "type": "string",
+          "default": ".devkb",
+          "description": "Local data directory for DevKB"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p ./",
+    "vscode:prepublish": "npm run build",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@types/vscode": "^1.75.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {}
+}
